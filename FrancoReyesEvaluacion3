@@ -1,0 +1,144 @@
+#FRANCO REYES JIMENEZ 
+import random as rd
+
+lNIFnum=[21233110,]
+lNIFstr=["444",]
+lNombres=["Franco Reyes J",]
+lEdades=[19,]
+lNIFfinal=["21233110-444",]
+exe=1
+cUsuarios=0
+#FUNCION GRABAR
+def GRABAR():
+  cGrabar=0
+  while cGrabar==0:
+    try:
+      rNIFnum=int(input("Ingrese la parte numerica del NIF: "))
+      if rNIFnum<0 or rNIFnum>99999999:
+        print("***Ingreso erroneo, intentelo nuevamente***\n\n")
+      else:
+        cGrabar+=1
+    except ValueError:
+      print("Utilice números para esta sección.")
+  while cGrabar==1:
+    try:
+      rNIFstr=str(input("Ingrese los ultimos 3 caracteres del NIF: "))
+      cNIF=0
+      for i in rNIFstr:
+        cNIF+=1
+      if cNIF==3:
+        cGrabar+=1
+      else:
+        print("Incompleto, inténtelo de nuevo.")
+    except ValueError:
+      print("Campo incompleto, intentelo denuevo.")
+  while cGrabar==2:
+    try:  
+      rNombre=str(input("Ingrese su nombre completo: "))
+      cNombre=0
+      for i in rNombre:
+        cNombre+=1
+      if cNombre>=8:
+        cGrabar+=1
+      else:
+        print("***Nombre incompleto, intentelo nuevamente.***")
+    except ValueError:
+      print("Campo incompleto, intentelo denuevo.")
+  while cGrabar==3:
+    try:  
+      rEdad=int(input("Ingrese su edad: "))
+      if rEdad>0:
+        cGrabar+=1
+      else:
+        print("***Edad no valida, intentelo nuevamente.***")
+    except ValueError:
+      print("Ingrese numeros para esta sección.")
+  while cGrabar==4:
+    lNIFnum.append(rNIFnum)
+    lNIFstr.append(rNIFstr) 
+    lNombres.append(rNombre)
+    lEdades.append(rEdad)
+    NIFfinal=(f"{rNIFnum}-{rNIFstr}")
+    lNIFfinal.append(NIFfinal)   
+    
+    break
+#FIN FUNCION GRABAR
+#FUNCION BUSCAR
+def BUSCAR():
+  print("Usted selecciono Buscar")
+  bNIF=int(input("Ingrese el NIF a buscar: "))
+  try:
+    pos=(lNIFnum.index(bNIF))
+    NIFbuscar=lNIFfinal[pos]
+    NOMBREBuscar=lNombres[pos]
+    EDADbuscar=lEdades[pos]
+
+    print("NIF\t",NIFbuscar)
+    print("NOMBRE:\t",NOMBREBuscar)
+    print("EDAD:\t",EDADbuscar)
+  except ValueError:
+    print("Ese NIF no está en Registrado...")
+
+#FIN FUNCION BUSCAR
+#FUNCION IMPRIMIR
+def IMPRIMIR():
+  bNIF=int(input("Ingrese su NIF: "))
+  try:
+    pos=(lNIFnum.index(bNIF))
+    NIFbuscar=lNIFfinal[pos]
+    NOMBREBuscar=lNombres[pos]
+    EDADbuscar=lEdades[pos]
+
+  except ValueError:
+    print("Ese NIF no está en Registrado...")
+
+  print("Usted seleccionó Imprimir certificados.")
+  try:
+    IC=int(input("1. Certificado de nacimiento.\n2. Estado Conyugal. \n3. Pertenencia a la union europea.\n4. Salir.\nIngrese el certificado que quiere imprimir: "))
+    while IC!=4:
+      if IC==1:
+        print(f"Certificado de nacimiento.\n{NOMBREBuscar}, nacido el {dia}/{mes} hace {EDADbuscar} años. En Viña del mar.") 
+        break
+      elif IC==2:
+        print(f"Sr/a {NOMBREBuscar}, se encuentra en situacion de {EC}")
+        break
+      elif IC==3:
+        print(f"Sr/a {NOMBREBuscar} pertenecce a la Union Europea.")
+        break
+  except ValueError:
+    print("Campo vacío, o error de valor; Intentelo nuevamente.")
+while exe==1:
+  try:
+    op=int(input("\tUNION EUROPEA DE ESPAÑA\n1. Grabar datos\n2. Buscar datos\n3. Imprimir certificados\n4. Salir\nIngrese su respuesta: "))
+    while op!=4:
+      if op==1:
+        GRABAR()
+        cUsuarios+=1
+        break
+
+      elif op==2:
+        BUSCAR()
+        break
+        
+
+      elif op==3:
+        EstadoCivil=rd.randint(0,4)
+        if EstadoCivil==1:
+          EC="CASADO"
+        elif EstadoCivil==2:
+          EC="SOLTERO"
+        elif EstadoCivil==3:
+          EC="VIUDO"
+        elif EstadoCivil==4:
+          EC="DIVORCIADO"
+        else:
+          EC="N/D"
+        dia=rd.randint(1,28)
+        mes=rd.randint(1,12)
+
+        IMPRIMIR()
+          
+        break
+    exe=0
+  finally:
+    print("Cerrando sesión...")
